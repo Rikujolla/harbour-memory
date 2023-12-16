@@ -14,7 +14,29 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my Sailfish OS Application
+Memory card game application intented for multiple players with multiple devices on local network.
+
+# This description section includes metadata for SailfishOS:Chum, see
+# https://github.com/sailfishos-chum/main/blob/main/Metadata.md
+%if 0%{?_chum}
+Title: Memory card game
+Type: desktop-application
+DeveloperName: Riku Lahtinen
+Categories:
+ - Games
+Custom:
+  Repo: https://github.com/Rikujolla/harbour-memory
+PackageIcon: https://github.com/Rikujolla/harbour-memory/raw/main/harbour-memory.png
+Screenshots:
+ - https://github.com/Rikujolla/harbour-memory/raw/main/screenshots/screenshot1.png
+ - https://github.com/Rikujolla/harbour-memory/raw/main/screenshots/screenshot2.png
+ - https://github.com/Rikujolla/harbour-memory/raw/main/screenshots/screenshot3.png
+Links:
+  Homepage: https://github.com/Rikujolla/harbour-memory
+  Help: https://github.com/Rikujolla/harbour-memory/discussions
+  Bugtracker: https://github.com/Rikujolla/harbour-memory/issues
+  Donation:
+%endif
 
 
 %prep

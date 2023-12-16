@@ -14,12 +14,15 @@ TARGET = harbour-memory
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-memory.cpp
+SOURCES += src/harbour-memory.cpp \
+    src/receiver.cpp \
+    src/sender.cpp
 
 DISTFILES += qml/harbour-memory.qml \
     qml/cover/CoverPage.qml \
     qml/pages/About.qml \
     qml/pages/MainPage.qml \
+    qml/pages/helpers.js \
     rpm/harbour-memory.changes.in \
     rpm/harbour-memory.changes.run.in \
     rpm/harbour-memory.spec \
@@ -37,3 +40,7 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-memory-de.ts
+
+HEADERS += \
+    src/receiver.h \
+    src/sender.h

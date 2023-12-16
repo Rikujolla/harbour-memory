@@ -83,7 +83,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: {qsTr("The idea of the software is to help children to learn maths.")
+                text: {qsTr("The idea of the software is to play with memory cards.")
                 }
             }
 
@@ -115,7 +115,8 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: {
-                    qsTr("App icon (Riku Lahtinen)")
+                    qsTr("App icon (Riku Lahtinen)") + "\n"
+                    +qsTr("Chess cards (Kapu)")
                 }
             }
 
@@ -132,7 +133,7 @@ Page {
                 }
                 text: qsTr("Copyright (c) 2015, Riku Lahtinen") + "\n"
                       + qsTr("Licensed under BSD. License, source code and more information:") + "\n"
-                      + ("https://github.com/Rikujolla/harbour-math-teacher")
+                      + ("https://github.com/Rikujolla/harbour-memory")
             }
         }
     }

@@ -3,6 +3,10 @@
 #endif
 
 #include <sailfishapp.h>
+#include <QtQml>
+
+#include "sender.h"
+#include "receiver.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +19,8 @@ int main(int argc, char *argv[])
     //   - SailfishApp::pathToMainQml() to get a QUrl to the main QML file
     //
     // To display the view, call "show()" (will show fullscreen on device).
+    qmlRegisterType<Sender>("harbour.memory.sender", 1, 0, "UdpSender");
+    qmlRegisterType<Receiver>("harbour.memory.receiver", 1, 0, "UdpReceiver");
 
     return SailfishApp::main(argc, argv);
 }
