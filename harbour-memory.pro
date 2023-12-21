@@ -19,11 +19,13 @@ SOURCES += src/harbour-memory.cpp \
     src/sender.cpp
 
 DISTFILES += qml/harbour-memory.qml \
+    README.md \
     qml/cover/CoverPage.qml \
     qml/pages/About.qml \
+    qml/pages/Settings.qml \
     qml/pages/MainPage.qml \
     qml/pages/helpers.js \
-    rpm/harbour-memory.changes.in \
+    rpm/harbour-memory.changes \
     rpm/harbour-memory.changes.run.in \
     rpm/harbour-memory.spec \
     translations/*.ts \

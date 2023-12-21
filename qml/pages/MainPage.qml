@@ -27,6 +27,10 @@ Page {
                 onClicked: pageStack.animatorPush(Qt.resolvedUrl("About.qml"))
             }
             MenuItem {
+                text: qsTr("Settings")
+                onClicked: pageStack.animatorPush(Qt.resolvedUrl("Settings.qml"))
+            }
+            MenuItem {
                 text: qsTr("Restart")
                 onClicked: {MyHelpers.populate_view()
                     myPoints = 0
@@ -54,6 +58,7 @@ Page {
             }
             UdpReceiver {
                 id:urecei
+                onRmoveChanged: MyHelpers.showOthersMove()
             }
             /*Label {
                 x: Theme.horizontalPageMargin
@@ -109,15 +114,21 @@ Page {
                                     cards_img.set(second_card_id,{"mareaenab":0})
 
                                     if (cards_img.get(first_card_id).memcard == cards_img.get(second_card_id).memcard) {
-                                        //cards_img.set(first_card_id,{"visib":0})
-                                        //cards_img.set(second_card_id,{"visib":0})
-                                        //cards_img.set(first_card_id,{"mareaenab":0})
-                                        //cards_img.set(second_card_id,{"mareaenab":0})
                                         myPoints++
+                                        cards_img.set(first_card_id,{"owner":player_id})
+                                        cards_img.set(second_card_id,{"owner":player_id})
+                                        cardMoveString = MyHelpers.movestring(cards_img.count, first_card_id, second_card_id, player_id)
+                                        usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
+                                        usend.broadcastDatagram()
                                         first_card_id = -1;
                                         second_card_id = -1;
                                         console.log("Sama")
                                     } else {
+                                        cards_img.set(first_card_id,{"owner":99})
+                                        cards_img.set(second_card_id,{"owner":99})
+                                        cardMoveString = MyHelpers.movestring(cards_img.count, first_card_id, second_card_id, 99)
+                                        usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
+                                        usend.broadcastDatagram()
                                         cardCloser.start()
                                     }
 
@@ -138,14 +149,58 @@ Page {
             }
 
             Button {
-                text:"Start broadcasting"
+                //"Initiate the game, start listening datagrams"
+                text:"Initiate the game"
+                visible: playMode == "othDevice"
                 onClicked: {
-                    urecei.startReceiver();
-                    usend.startSender();
-                    //console.log("pressed")
+                    //urecei.startReceiver();
+                    urecei.processPendingDatagrams();
+                    console.log("Initiate the game, start listening datagrams")
+                }
+            }
+            Button {
+                text:"Participate the game"
+                onClicked: {
+                    console.log("Participate")
+                    console.log(cardPositionString)
+                    usend.cmove = "INIT," + myPlayerName +"," + cardPositionString
+                    usend.sendPosition()
+                    console.log(usend.cmove)
+
+                }
+            }
+            Button {
+                text:"Cards lifted"
+                onClicked: {
+                    //usend.startSender();
+                    usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
+                    usend.sport = myPort
+                    console.log("MOVE," + myPlayerName + "," + cardMoveString  )
+                }
+            }
+            Button {
+                text:"Start the game"
+                onClicked: {
+                    console.log("Start")
+                }
+            }
+            Button {
+                text:"Send move"
+                onClicked: {
+                    console.log("Send move")
+                    usend.broadcastDatagram()
+                    test_test.text = "test" + urecei.rmove
                 }
             }
 
+            Label {
+                id:test_test
+                x: Theme.horizontalPageMargin
+                text: "M"
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeExtraSmall
+
+            }
             Timer {
                 id:cardCloser
                 interval: 2000
@@ -156,9 +211,23 @@ Page {
                     cards_img.set(second_card_id,{"visib":1})
                     cards_img.set(first_card_id,{"mareaenab":1})
                     cards_img.set(second_card_id,{"mareaenab":1})
+                    cards_img.set(first_card_id,{"owner":0})
+                    cards_img.set(second_card_id,{"owner":0})
                     first_card_id = -1;
                     second_card_id = -1;
                     cardCloser.stop()
+                }
+            }
+
+            Timer {
+                id:opponentMoveDiscloser
+                interval: 100
+                running:false
+                repeat:true
+                onTriggered: {
+                    if (urecei.rmove != usend.sipadd){
+                        test_test.text = urecei.rmove
+                    }
                 }
             }
 

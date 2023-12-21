@@ -1,5 +1,5 @@
 // Copyright (C) 2017 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
+// BSD-3-Clause
 
 #include <QUdpSocket>
 //#include <QCoreApplication>
@@ -20,10 +20,10 @@ Receiver::Receiver()
     //! [1]
 }
 
-void Receiver::startReceiver()
+/*void Receiver::startReceiver()
 {
     processPendingDatagrams();
-}
+}*/
 
 void Receiver::processPendingDatagrams()
 {
@@ -32,8 +32,11 @@ void Receiver::processPendingDatagrams()
     while (udpSocket->hasPendingDatagrams()) {
         datagram.resize(int(udpSocket->pendingDatagramSize()));
         udpSocket->readDatagram(datagram.data(), datagram.size());
-        qDebug() << (tr("Received datagram: \"%1\"")
+        qDebug() << "Move received";
+        qDebug() << (tr("DGRA,%1")
                              .arg(datagram.constData()));
+        myRmove = (tr("%1").arg(datagram.constData()));
+        qDebug() << myRmove;
     }
     //! [2]
 }

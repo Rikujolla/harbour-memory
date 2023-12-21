@@ -9,5 +9,11 @@ ApplicationWindow {
     // Global variables
     property string piePat_up: "images/" // Piece sub path
     property string piePat: "images/piece0/" // Piece sub path
+    property string myPlayerName:""
+    property int myPort: 45454
+    property string playMode: "only_me"
+    property string cardPositionString:""
+    property string cardMoveString:""
+    property int player_id:1 // Default id for playleader 1
 
 }

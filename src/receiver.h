@@ -8,24 +8,34 @@
 
 
 QT_BEGIN_NAMESPACE
-//class QLabel;
 class QUdpSocket;
 QT_END_NAMESPACE
 
 class Receiver : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString rmove READ rmove WRITE setRmove NOTIFY rmoveChanged)
 
 public:
     explicit Receiver();
-    Q_INVOKABLE void startReceiver();
+    QString rmove(){return myRmove;}
+    void setRmove(QString tee3){
+        myRmove = tee3;
+        rmoveChanged(myRmove);
+    }
+
+    //    Q_INVOKABLE void startReceiver();
+    Q_INVOKABLE void processPendingDatagrams();
+signals:
+    void rmoveChanged(QString tee3);
 
 private slots:
-    void processPendingDatagrams();
+    //void processPendingDatagrams();
 
 private:
-//    QLabel *statusLabel = nullptr;
     QUdpSocket *udpSocket = nullptr;
+    QString myRmove;
+
 };
 
 #endif

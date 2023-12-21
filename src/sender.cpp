@@ -13,26 +13,31 @@ Sender::Sender()
 //! [0]
     udpSocket = new QUdpSocket(this);
 //! [0]
-    qDebug() << " testi" ;
+    qDebug() << " Constructor test" << mySipadd << mySport;
 
 }
 
 void Sender::startSender()
 {
     qDebug() << " testi2" ;
-    startBroadcasting();
-    broadcastDatagram();
+    //startBroadcasting();
+    //broadcastDatagram();
 }
 
-void Sender::startBroadcasting()
+void Sender::sendPosition() //sendInitialPosition
 {
     //timer.start(1000);
-    qDebug() << "start broadcasting" ;
+    qDebug() << "Send initial position" << myCmove;
+    //QByteArray datagram = "INIT," + mySipadd.toUtf8()  + "," + myCmove.toUtf8();
+    QByteArray datagram = mySipadd.toUtf8();
+    udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
 }
 
-void Sender::broadcastDatagram()
+void Sender::broadcastDatagram() // sendMove
 {
-    QByteArray datagram = "Broadcast message " + QByteArray::number(messageNo);
+    qDebug() << "start broadcasting" << mySipadd << mySport;
+    //QByteArray datagram = "MOVE," + mySipadd.toUtf8()  + "," + QByteArray::number(messageNo);
+    QByteArray datagram = mySipadd.toUtf8();
     udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
 //! [1]
     ++messageNo;

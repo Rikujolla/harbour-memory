@@ -8,10 +8,12 @@ function populate_view() {
 
     cards_img.clear();
     for (var i = 0; i < cards.length; i++) {
-        cards_img.append({"memcard": piePat + cards[i] + ".png", "visib": 1, "mareaenab": 1})
+        cards_img.append({"memcard": piePat + cards[i] + ".png", "visib": 1, "mareaenab": 1, "owner":0})
         //cards_img.append({})
 
     }
+
+    cardPositionString = cards.toString();
 
 }
 
@@ -25,4 +27,35 @@ function shuffleArray(array) {
         array[j] = temp;
     }
 };
+
+// This function return moves as string
+function movestring(size,i,j,id) {
+    var _movestring = ""
+    for (var z = 0; z<size; z++){
+        if (z==i || z == j){
+            if (z==size-1){
+                _movestring = _movestring + cards_img.get(z).owner
+            } else {
+                //_movestring = _movestring + id.toString() + ","
+                _movestring = _movestring + cards_img.get(z).owner + ","
+
+            }
+        }
+        else {
+            if (z==size-1){
+                _movestring = _movestring + cards_img.get(z).owner
+            } else {
+                _movestring = _movestring + cards_img.get(z).owner + ","
+            }
+        }
+    }
+    console.log(_movestring)
+
+    return _movestring
+
+}
+
+function showOthersMove() {
+ console.log("movee" + urecei.rmove)
+}
 

@@ -78,11 +78,117 @@
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Receiver</name>
     <message>
-        <source>Received datagram: &quot;%1&quot;</source>
+        <source>DGRA,%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <source>Save settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>+10 s</source>
+        <extracomment>Reduce time by 1 minute Increase time by 10 seconds</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-10 s</source>
+        <extracomment>Reduce time by 10 seconds</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chess settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opponent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Human</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style of the pieces</source>
+        <extracomment>The style of the pieces selector</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unlike</source>
+        <extracomment>The style of the pieces is unlike</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Classic</source>
+        <extracomment>The style of the pieces is classic</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Personal art</source>
+        <extracomment>Player can select the pieces of her or his choice</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Player name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only me</source>
+        <extracomment>Stockfish is a name of the chess engine, more info https://stockfishchess.org/</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Player ID</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
