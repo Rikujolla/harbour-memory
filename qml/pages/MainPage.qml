@@ -130,6 +130,9 @@ Page {
                                         usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
                                         usend.broadcastDatagram()
                                         cardCloser.start()
+                                        if (playMode == "othDevice"){
+                                        opponentMoveDiscloser.start()
+                                        }
                                     }
 
                                 }
@@ -160,8 +163,10 @@ Page {
             }
             Button {
                 text:"Participate the game"
+                visible: playMode == "othDevice"
                 onClicked: {
                     console.log("Participate")
+                    visible: playMode == "othDevice"
                     console.log(cardPositionString)
                     usend.cmove = "INIT," + myPlayerName +"," + cardPositionString
                     usend.sendPosition()
@@ -171,6 +176,7 @@ Page {
             }
             Button {
                 text:"Cards lifted"
+                visible: playMode == "othDevice"
                 onClicked: {
                     //usend.startSender();
                     usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
@@ -180,12 +186,14 @@ Page {
             }
             Button {
                 text:"Start the game"
+                visible: playMode == "othDevice"
                 onClicked: {
                     console.log("Start")
                 }
             }
             Button {
                 text:"Send move"
+                visible: playMode == "othDevice"
                 onClicked: {
                     console.log("Send move")
                     usend.broadcastDatagram()
@@ -195,6 +203,7 @@ Page {
 
             Label {
                 id:test_test
+                visible: playMode == "othDevice"
                 x: Theme.horizontalPageMargin
                 text: "M"
                 color: Theme.secondaryHighlightColor
@@ -216,18 +225,26 @@ Page {
                     first_card_id = -1;
                     second_card_id = -1;
                     cardCloser.stop()
+                    if (playMode == "othDevice"){
+                    opponentMoveDiscloser.start()
+                    }
                 }
             }
 
             Timer {
                 id:opponentMoveDiscloser
-                interval: 100
+                interval: 1000
                 running:false
                 repeat:true
                 onTriggered: {
-                    if (urecei.rmove != usend.sipadd){
+                    var time = 0
+                    console.log("opponent discloser")
+                    if (urecei.rmove != usend.sipadd ||time>10){
                         test_test.text = urecei.rmove
+                        MyHelpers.showOthersMove()
+                        opponentMoveDiscloser.stop()
                     }
+                    time++
                 }
             }
 

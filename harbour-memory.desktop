@@ -10,11 +10,14 @@ Name=harbour-memory
 # Remember to comment out the following line, if you do not want to use
 # a different app name in German locale (de).
 Name[de]=harbour-memory
+# Suomeksi (fi)
+Name[fi]=Muistipeli
+
 
 [X-Sailjail]
 # Replace with your organization as a reverse domain name
-OrganizationName=org.myorg
+OrganizationName=fi.rikujolla
 # ApplicationName does not have to be identical to Name
-ApplicationName=memory
+ApplicationName=Memory
 # Add the required permissions here
-Permissions=
+Permissions= Internet
