@@ -1,7 +1,7 @@
 Name:       harbour-memory
 
 Summary:    Multiple player networked memory card game
-Version:    0.0.5
+Version:    0.0.6
 Release:    1
 License:    BSD
 URL:        http://example.org/

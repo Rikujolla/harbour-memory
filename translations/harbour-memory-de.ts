@@ -123,10 +123,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Chess settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Opponent</source>
         <translation type="unfinished"></translation>
     </message>
@@ -189,6 +185,10 @@
     </message>
     <message>
         <source>Player ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

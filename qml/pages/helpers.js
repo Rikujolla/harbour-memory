@@ -56,6 +56,31 @@ function movestring(size,i,j,id) {
 }
 
 function showOthersMove() {
- console.log("movee" + urecei.rmove)
+    //console.log("movee" + urecei.rmove)
+    var table = []
+    table = urecei.rmove.split(",")
+    for (var i = 2; i<table.length;i++){
+        if (Number(table[i])>0){
+            cards_img.set(i-2,{"visib":0})
+        }
+    }
 }
+
+function makeInitialPosition() {
+    var table = []
+    var cards = []
+    table = urecei.rmove.split(",")
+    if (table[0] == "INIT") {
+        cards_img.clear();
+        for (var i = 2; i<table.length;i++){
+            cards[i-2] = table[i]
+            cards_img.append({"memcard": piePat + table[i] + ".png", "visib": 1, "mareaenab": 1, "owner":0})
+        }
+       initialPositionTimer.stop()
+    }
+
+    cardPositionString = cards.toString();
+
+}
+
 

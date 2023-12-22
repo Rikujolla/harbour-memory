@@ -60,12 +60,7 @@ Page {
                 id:urecei
                 onRmoveChanged: MyHelpers.showOthersMove()
             }
-            /*Label {
-                x: Theme.horizontalPageMargin
-                text: qsTr("Hello Sailors")
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
-            }*/
+
             BackgroundItem {
                 //height:Orientation.Portrait ? cards_img.count*Screen.width/6/6 : cards_img.count/(Screen.height/Screen.width*6)
                 height:cards_img.count*Screen.width/6/6
@@ -134,13 +129,10 @@ Page {
                                         opponentMoveDiscloser.start()
                                         }
                                     }
-
                                 }
                             }
                         } // End MouseArea
-
                     }
-
                 }
             }
 
@@ -156,14 +148,17 @@ Page {
                 text:"Initiate the game"
                 visible: playMode == "othDevice"
                 onClicked: {
-                    //urecei.startReceiver();
                     urecei.processPendingDatagrams();
                     console.log("Initiate the game, start listening datagrams")
+                    if (player_id > 1) {
+                        initialPositionTimer.start()
+                    }
                 }
             }
             Button {
-                text:"Participate the game"
-                visible: playMode == "othDevice"
+                // If player_id == 1 send my position to other players
+                text:"Start the game"
+                visible: playMode == "othDevice" && player_id < 2
                 onClicked: {
                     console.log("Participate")
                     visible: playMode == "othDevice"
@@ -174,6 +169,7 @@ Page {
 
                 }
             }
+
             Button {
                 text:"Cards lifted"
                 visible: playMode == "othDevice"
@@ -184,14 +180,8 @@ Page {
                     console.log("MOVE," + myPlayerName + "," + cardMoveString  )
                 }
             }
-            Button {
-                text:"Start the game"
-                visible: playMode == "othDevice"
-                onClicked: {
-                    console.log("Start")
-                }
-            }
-            Button {
+
+            Button { // Not needed??
                 text:"Send move"
                 visible: playMode == "othDevice"
                 onClicked: {
@@ -239,11 +229,24 @@ Page {
                 onTriggered: {
                     var time = 0
                     console.log("opponent discloser")
-                    if (urecei.rmove != usend.sipadd ||time>10){
+                    if (urecei.rmove != usend.sipadd ||time>60){
                         test_test.text = urecei.rmove
                         MyHelpers.showOthersMove()
                         opponentMoveDiscloser.stop()
                     }
+                    time++
+                }
+            }
+
+            Timer {
+                id:initialPositionTimer
+                interval: 2000
+                running:false
+                repeat:true
+                onTriggered: {
+                    var time = 0
+                    console.log("Initial position")
+                        MyHelpers.makeInitialPosition()
                     time++
                 }
             }

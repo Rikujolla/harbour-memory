@@ -77,7 +77,7 @@ Page {
             UdpSender {
                 id:usend
             }
-            SectionHeader { text: qsTr("Time settings") }
+            SectionHeader { text: qsTr("Time settings")}
 
             Row {
                 x: Theme.paddingLarge
@@ -93,7 +93,6 @@ Page {
                     text: sets.labels[0].lab
                     width: page.width /6
                     onClicked: {
-
                     }
                 }
                 Button {
@@ -105,72 +104,7 @@ Page {
             }
 
 
-            SectionHeader { text: qsTr("Chess settings")
-            }
-
-            Row {
-                x: Theme.paddingLarge
-                spacing: Theme.paddingMedium
-                Text {
-                    text: qsTr("Player name")
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                    font.pixelSize: Theme.fontSizeSmall
-                    width:page.width/2
-                    wrapMode: Text.WordWrap
-                }
-
-                TextField {
-                    id: player
-                    placeholderText: "Hopo"
-                    text:myPlayerName
-                    width: page.width/2
-                    //validator: RegExpValidator { regExp: /^\d*\.?\d*$/ }
-                    //color: errorHighlight? "red" : Theme.primaryColor
-                    //inputMethodHints: Qt.ImhDigitsOnly
-                    //EnterKey.enabled: !errorHighlight
-                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                    EnterKey.onClicked: {
-                        focus = false
-                        myPlayerName = player.text
-                        usend.sipadd = myPlayerName
-                        console.log(myPlayerName, usend.sipadd);
-                    }
-                }
-            }
-
-            Row {
-                x: Theme.paddingLarge
-                spacing: Theme.paddingMedium
-                Text {
-                    text: qsTr("Player ID")
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                    font.pixelSize: Theme.fontSizeSmall
-                    width:page.width/2
-                    wrapMode: Text.WordWrap
-                }
-
-                TextField {
-                    id: playerIdBox
-                    placeholderText: "ID"
-                    text:player_id
-                    width: page.width/2
-                    validator: RegExpValidator { regExp: /^\d*\.?\d*$/ }
-                    color: errorHighlight? "red" : Theme.primaryColor
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    EnterKey.enabled: !errorHighlight
-                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                    EnterKey.onClicked: {
-                        focus = false
-                        player_id = playerIdBox.text
-                        //usend.sipadd = myPlayerName
-                        //console.log(myPlayerName, usend.sipadd);
-                    }
-                }
-            }
-
-
+            SectionHeader { text: qsTr("Network settings")}
 
             ComboBox {
                 id: setOpponent
@@ -258,6 +192,72 @@ Page {
                     }
                 }
             }
+
+
+            Row {
+                x: Theme.paddingLarge
+                spacing: Theme.paddingMedium
+                visible: playMode == "othDevice"
+                Text {
+                    text: qsTr("Player name")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    font.pixelSize: Theme.fontSizeSmall
+                    width:page.width/2
+                    wrapMode: Text.WordWrap
+                }
+
+                TextField {
+                    id: player
+                    placeholderText: "Hopo"
+                    text:myPlayerName
+                    width: page.width/2
+                    //validator: RegExpValidator { regExp: /^\d*\.?\d*$/ }
+                    //color: errorHighlight? "red" : Theme.primaryColor
+                    //inputMethodHints: Qt.ImhDigitsOnly
+                    //EnterKey.enabled: !errorHighlight
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                    EnterKey.onClicked: {
+                        focus = false
+                        myPlayerName = player.text
+                        usend.sipadd = myPlayerName
+                        console.log(myPlayerName, usend.sipadd);
+                    }
+                }
+            }
+
+            Row {
+                x: Theme.paddingLarge
+                spacing: Theme.paddingMedium
+                visible: playMode == "othDevice"
+                Text {
+                    text: qsTr("Player ID")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    font.pixelSize: Theme.fontSizeSmall
+                    width:page.width/2
+                    wrapMode: Text.WordWrap
+                }
+
+                TextField {
+                    id: playerIdBox
+                    placeholderText: "ID"
+                    text:player_id
+                    width: page.width/2
+                    validator: RegExpValidator { regExp: /^\d*\.?\d*$/ }
+                    color: errorHighlight? "red" : Theme.primaryColor
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    EnterKey.enabled: !errorHighlight
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                    EnterKey.onClicked: {
+                        focus = false
+                        player_id = playerIdBox.text
+                        //usend.sipadd = myPlayerName
+                        //console.log(myPlayerName, usend.sipadd);
+                    }
+                }
+            }
+
 
             SectionHeader { text: qsTr("View settings")
             }
