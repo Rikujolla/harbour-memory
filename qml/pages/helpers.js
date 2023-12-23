@@ -70,16 +70,17 @@ function makeInitialPosition() {
     var table = []
     var cards = []
     table = urecei.rmove.split(",")
+    console.log(table[0])
     if (table[0] == "INIT") {
         cards_img.clear();
         for (var i = 2; i<table.length;i++){
             cards[i-2] = table[i]
             cards_img.append({"memcard": piePat + table[i] + ".png", "visib": 1, "mareaenab": 1, "owner":0})
         }
-       initialPositionTimer.stop()
+        cardPositionString = cards.toString();
+        initialPositionTimer.stop()
     }
 
-    cardPositionString = cards.toString();
 
 }
 

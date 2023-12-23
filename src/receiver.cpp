@@ -33,8 +33,8 @@ void Receiver::processPendingDatagrams()
         datagram.resize(int(udpSocket->pendingDatagramSize()));
         udpSocket->readDatagram(datagram.data(), datagram.size());
         qDebug() << "Move received";
-        qDebug() << (tr("DGRA,%1")
-                             .arg(datagram.constData()));
+        //qDebug() << (tr("DGRA,%1")
+        //                     .arg(datagram.constData()));
         myRmove = (tr("%1").arg(datagram.constData()));
         qDebug() << myRmove;
     }

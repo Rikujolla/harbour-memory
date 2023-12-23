@@ -86,10 +86,6 @@
 <context>
     <name>Receiver</name>
     <message>
-        <source>DGRA,%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1</source>
         <translation type="unfinished"></translation>
     </message>

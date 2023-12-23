@@ -29,7 +29,7 @@ void Sender::sendPosition() //sendInitialPosition
     //timer.start(1000);
     qDebug() << "Send initial position" << myCmove;
     //QByteArray datagram = "INIT," + mySipadd.toUtf8()  + "," + myCmove.toUtf8();
-    QByteArray datagram = mySipadd.toUtf8();
+    QByteArray datagram = myCmove.toUtf8();
     udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
 }
 
