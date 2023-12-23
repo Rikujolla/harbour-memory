@@ -69,7 +69,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 //: The name of the app followed with a version number
-                text: {qsTr("Memory, version") + " 0.0.7"}
+                text: {qsTr("Memory, version") + " 0.0.8"}
             }
 
             SectionHeader { text: qsTr("Idea") }

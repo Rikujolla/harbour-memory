@@ -82,6 +82,14 @@
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>My cards position sent to other users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Listening other devices</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Receiver</name>

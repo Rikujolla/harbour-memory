@@ -90,7 +90,7 @@ Page {
                             anchors.fill: parent
                             height: memoGrid.cellHeight
                             width: memoGrid.cellWidth
-                            enabled: !cardCloser.running && mareaenab > 0
+                            enabled: !cardCloser.running && mareaenab > 0 && player_id == currentPlayer
                             onClicked: {
                                 console.log(index);
                                 //back_side.visible = false
@@ -113,8 +113,10 @@ Page {
                                         cards_img.set(first_card_id,{"owner":player_id})
                                         cards_img.set(second_card_id,{"owner":player_id})
                                         cardMoveString = MyHelpers.movestring(cards_img.count, first_card_id, second_card_id, player_id)
-                                        usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
-                                        usend.broadcastDatagram()
+                                        if (playMode == "othDevice"){
+                                            usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
+                                            usend.broadcastDatagram()
+                                        }
                                         first_card_id = -1;
                                         second_card_id = -1;
                                         console.log("Sama")
@@ -122,11 +124,11 @@ Page {
                                         cards_img.set(first_card_id,{"owner":99})
                                         cards_img.set(second_card_id,{"owner":99})
                                         cardMoveString = MyHelpers.movestring(cards_img.count, first_card_id, second_card_id, 99)
-                                        usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
-                                        usend.broadcastDatagram()
                                         cardCloser.start()
                                         if (playMode == "othDevice"){
-                                        opponentMoveDiscloser.start()
+                                            usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
+                                            usend.broadcastDatagram()
+                                            //opponentMoveDiscloser.start()
                                         }
                                     }
                                 }
@@ -150,6 +152,7 @@ Page {
                 onClicked: {
                     urecei.processPendingDatagrams();
                     console.log("Initiate the game, start listening datagrams")
+                    notification_box.text = qsTr("Listening other devices")
                     if (player_id > 1) {
                         initialPositionTimer.start()
                     }
@@ -166,13 +169,14 @@ Page {
                     usend.cmove = "INIT," + myPlayerName +"," + cardPositionString
                     usend.sendPosition()
                     console.log(usend.cmove)
+                    notification_box.text = qsTr("My cards position sent to other users")
 
                 }
             }
 
-            Button {
+            Button { //To be removed??
                 text:"Cards lifted"
-                visible: playMode == "othDevice"
+                visible: false
                 onClicked: {
                     //usend.startSender();
                     usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
@@ -181,18 +185,9 @@ Page {
                 }
             }
 
-            Button { // Not needed??
-                text:"Send move"
-                visible: playMode == "othDevice"
-                onClicked: {
-                    console.log("Send move")
-                    usend.broadcastDatagram()
-                    test_test.text = "test" + urecei.rmove
-                }
-            }
 
             Label {
-                id:test_test
+                id:notification_box
                 visible: playMode == "othDevice"
                 x: Theme.horizontalPageMargin
                 text: "M"
@@ -202,7 +197,7 @@ Page {
             }
             Timer {
                 id:cardCloser
-                interval: 2000
+                interval: 2130
                 running: false
                 repeat: false
                 onTriggered:{
@@ -216,40 +211,52 @@ Page {
                     second_card_id = -1;
                     cardCloser.stop()
                     if (playMode == "othDevice"){
-                    opponentMoveDiscloser.start()
+                        //opponentMoveDiscloser.start()
                     }
                 }
             }
 
             Timer {
                 id:opponentMoveDiscloser
-                interval: 1000
+                interval: 1650
                 running:false
                 repeat:true
                 onTriggered: {
-                    var time = 0
-                    console.log("opponent discloser")
-                    if (urecei.rmove != usend.sipadd ||time>60){
-                        test_test.text = urecei.rmove
+                    //console.log("opponent discloser")
+                    var temp = urecei.rmove.split(",")
+                    //console.log(temp[0])
+                    if (urecei.rmove != usend.sipadd && temp[0] != "INIT"){
+                        notification_box.text = urecei.rmove
                         MyHelpers.showOthersMove()
-                        opponentMoveDiscloser.stop()
+                        //opponentMoveDiscloser.stop()
                     }
-                    time++
                 }
             }
 
             Timer {
                 id:initialPositionTimer
-                interval: 2000
+                interval: 2060
                 running:false
                 repeat:true
                 onTriggered: {
-                    var time = 0
                     console.log("Initial position")
-                        MyHelpers.makeInitialPosition()
-                    time++
+                    MyHelpers.makeInitialPosition()
+                    opponentMoveDiscloser.start()
                 }
             }
+
+            Timer {
+                id:falseMoveCloser
+                interval: 2120
+                running:false
+                repeat:false
+                onTriggered: {
+                    console.log("Initial position")
+                    MyHelpers.makeInitialPosition()
+                    falseMoveCloser.stop()
+                }
+            }
+
 
             ListModel {
                 id:cards_img
