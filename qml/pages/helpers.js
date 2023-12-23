@@ -58,6 +58,8 @@ function movestring(size,i,j,id) {
 function showOthersMove() {
     var table = []
     var cards = []
+    if (currentPlayer == numberOfPlayers) {currentPlayer = 1}
+    else {currentPlayer++}
     table = urecei.rmove.split(",")
     for (var i = 3; i<table.length;i++){
         cards[i-3] = table[i]
@@ -70,15 +72,7 @@ function showOthersMove() {
         falseMoveCloser.start()
         console.log("falsemove")
     }
-    if (currentPlayer == numberOfPlayers) {
-        currentPlayer = 1
-    }
-    else {
-    currentPlayer++
-    }
-    console.log()
     console.log(currentPlayer + " showOthersMove " + urecei.rmove)
-
 }
 
 function makeInitialPosition() {
@@ -94,7 +88,7 @@ function makeInitialPosition() {
         }
         cardPositionString = cards.toString();
         initialPositionTimer.stop()
-        notification_box.text = "Card positions udated"
+        notification_box.text = "Card positions updated"
     }
 
 
@@ -103,10 +97,11 @@ function makeInitialPosition() {
 function hideFalseMove() {
     //console.log("movee" + urecei.rmove)
     var table = []
-    table = cardPositionString.split(",")
-    for (var i = 3; i<table.length;i++){
+    table = cardMoveString.split(",")
+    console.log(cardMoveString)
+    for (var i = 0; i<table.length;i++){
         if (Number(table[i])>98){
-            cards_img.set(i-3,{"visib":1})
+            cards_img.set(i,{"visib":1})
         }
     }
 }

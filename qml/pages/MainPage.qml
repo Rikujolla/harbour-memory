@@ -92,8 +92,7 @@ Page {
                             width: memoGrid.cellWidth
                             enabled: !cardCloser.running && mareaenab > 0 && player_id == currentPlayer
                             onClicked: {
-                                console.log(index);
-                                //back_side.visible = false
+                                //console.log(index);
                                 if (cardCloser.running){
                                     console.log("Nothing")
                                 }
@@ -174,22 +173,12 @@ Page {
                 }
             }
 
-            Button { //To be removed??
-                text:"Cards lifted"
-                visible: false
-                onClicked: {
-                    //usend.startSender();
-                    usend.sport = myPort
-                    console.log("MOVE," + player_id + "," + myPlayerName + "," + cardMoveString  )
-                }
-            }
-
 
             Label {
                 id:notification_box
                 visible: playMode == "othDevice"
                 x: Theme.horizontalPageMargin
-                text: "M"
+                text: "Press first button"
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraSmall
 
@@ -250,8 +239,8 @@ Page {
                 running:false
                 repeat:false
                 onTriggered: {
-                    console.log("Initial position")
-                    MyHelpers.makeInitialPosition()
+                    console.log("Close false move")
+                    MyHelpers.hideFalseMove()
                     falseMoveCloser.stop()
                 }
             }

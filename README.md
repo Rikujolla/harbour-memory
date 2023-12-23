@@ -17,7 +17,7 @@ There will be main branch which is a code for the releases in Jolla Harbour and 
 8. Commit changes for the version, amend commits if changes are needed in the test process
 9. Merge dev branch to the main
 10. Move the source to GitHub
-11. Create package from GitHub master to the Mer OBS (tar -czvf harbour-memory-0.0.9.tar.bz2 harbour-memory-0.0.9/)
+11. Create package from GitHub master to the Mer OBS (tar -czvf harbour-memory-0.1.0.tar.bz2 harbour-memory-0.1.0/)
 12. Load the local rpms to Jolla Harbour and edit release info
 13. Load the local rpms to OpenRepos and edit release info
 
