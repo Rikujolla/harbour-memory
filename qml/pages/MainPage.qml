@@ -114,7 +114,7 @@ Page {
                                         cards_img.set(second_card_id,{"owner":player_id})
                                         cardMoveString = MyHelpers.movestring(cards_img.count, first_card_id, second_card_id, player_id)
                                         if (playMode == "othDevice"){
-                                            usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
+                                            usend.sipadd = "MOVE," + player_id + ","+ myPlayerName + "," + cardMoveString
                                             usend.broadcastDatagram()
                                         }
                                         first_card_id = -1;
@@ -126,7 +126,7 @@ Page {
                                         cardMoveString = MyHelpers.movestring(cards_img.count, first_card_id, second_card_id, 99)
                                         cardCloser.start()
                                         if (playMode == "othDevice"){
-                                            usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
+                                            usend.sipadd = "MOVE," + player_id + "," + myPlayerName + "," + cardMoveString
                                             usend.broadcastDatagram()
                                             //opponentMoveDiscloser.start()
                                         }
@@ -166,7 +166,7 @@ Page {
                     console.log("Participate")
                     visible: playMode == "othDevice"
                     console.log(cardPositionString)
-                    usend.cmove = "INIT," + myPlayerName +"," + cardPositionString
+                    usend.cmove = "INIT," + player_id + "," + myPlayerName +"," + cardPositionString
                     usend.sendPosition()
                     console.log(usend.cmove)
                     notification_box.text = qsTr("My cards position sent to other users")
@@ -179,9 +179,8 @@ Page {
                 visible: false
                 onClicked: {
                     //usend.startSender();
-                    usend.sipadd = "MOVE," + myPlayerName + "," + cardMoveString
                     usend.sport = myPort
-                    console.log("MOVE," + myPlayerName + "," + cardMoveString  )
+                    console.log("MOVE," + player_id + "," + myPlayerName + "," + cardMoveString  )
                 }
             }
 
@@ -225,7 +224,7 @@ Page {
                     //console.log("opponent discloser")
                     var temp = urecei.rmove.split(",")
                     //console.log(temp[0])
-                    if (urecei.rmove != usend.sipadd && temp[0] != "INIT"){
+                    if (urecei.rmove != usend.sipadd && temp[0] != "INIT" && currentPlayer == Number(temp[1])){
                         notification_box.text = urecei.rmove
                         MyHelpers.showOthersMove()
                         //opponentMoveDiscloser.stop()

@@ -59,10 +59,10 @@ function showOthersMove() {
     var table = []
     var cards = []
     table = urecei.rmove.split(",")
-    for (var i = 2; i<table.length;i++){
-        cards[i-2] = table[i]
+    for (var i = 3; i<table.length;i++){
+        cards[i-3] = table[i]
         if (Number(table[i])>0){
-            cards_img.set(i-2,{"visib":0})
+            cards_img.set(i-3,{"visib":0})
         }
     }
     cardMoveString = cards.toString();
@@ -88,8 +88,8 @@ function makeInitialPosition() {
     console.log(table[0])
     if (table[0] == "INIT") {
         cards_img.clear();
-        for (var i = 2; i<table.length;i++){
-            cards[i-2] = table[i]
+        for (var i = 3; i<table.length;i++){
+            cards[i-3] = table[i]
             cards_img.append({"memcard": piePat + table[i] + ".png", "visib": 1, "mareaenab": 1, "owner":0})
         }
         cardPositionString = cards.toString();
@@ -104,9 +104,9 @@ function hideFalseMove() {
     //console.log("movee" + urecei.rmove)
     var table = []
     table = cardPositionString.split(",")
-    for (var i = 2; i<table.length;i++){
+    for (var i = 3; i<table.length;i++){
         if (Number(table[i])>98){
-            cards_img.set(i-2,{"visib":1})
+            cards_img.set(i-3,{"visib":1})
         }
     }
 }
