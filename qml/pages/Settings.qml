@@ -258,6 +258,38 @@ Page {
                 }
             }
 
+            Row {
+                x: Theme.paddingLarge
+                spacing: Theme.paddingMedium
+                visible: playMode == "othDevice"
+                Text {
+                    text: qsTr("Number of players")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    font.pixelSize: Theme.fontSizeSmall
+                    width:page.width/2
+                    wrapMode: Text.WordWrap
+                }
+
+                TextField {
+                    id: numberPlayers
+                    placeholderText: "mount"
+                    text:numberOfPlayers
+                    width: page.width/2
+                    validator: RegExpValidator { regExp: /^\d*\.?\d*$/ }
+                    color: errorHighlight? "red" : Theme.primaryColor
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    EnterKey.enabled: !errorHighlight
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                    EnterKey.onClicked: {
+                        focus = false
+                        numberOfPlayers = numberPlayers.text
+                        //usend.sipadd = myPlayerName
+                        //console.log(myPlayerName, usend.sipadd);
+                    }
+                }
+            }
+
 
             SectionHeader { text: qsTr("View settings")
             }

@@ -58,8 +58,7 @@ function movestring(size,i,j,id) {
 function showOthersMove() {
     var table = []
     var cards = []
-    if (currentPlayer == numberOfPlayers) {currentPlayer = 1}
-    else {currentPlayer++}
+    updateCurrentPlayer()
     table = urecei.rmove.split(",")
     for (var i = 3; i<table.length;i++){
         cards[i-3] = table[i]
@@ -107,7 +106,15 @@ function hideFalseMove() {
 }
 
 function isInArray(value, array) {
-  return array.indexOf(value) > -1;
+    return array.indexOf(value) > -1;
+}
+
+function updateCurrentPlayer() {
+
+    if (currentPlayer == numberOfPlayers) {currentPlayer = 1}
+    else {currentPlayer++}
+    notification_current.text = qsTr("Current player: ") + currentPlayer
+
 }
 
 

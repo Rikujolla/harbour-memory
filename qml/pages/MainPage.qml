@@ -115,6 +115,7 @@ Page {
                                         if (playMode == "othDevice"){
                                             usend.sipadd = "MOVE," + player_id + ","+ myPlayerName + "," + cardMoveString
                                             usend.broadcastDatagram()
+                                            MyHelpers.updateCurrentPlayer()
                                         }
                                         first_card_id = -1;
                                         second_card_id = -1;
@@ -127,6 +128,7 @@ Page {
                                         if (playMode == "othDevice"){
                                             usend.sipadd = "MOVE," + player_id + "," + myPlayerName + "," + cardMoveString
                                             usend.broadcastDatagram()
+                                            MyHelpers.updateCurrentPlayer()
                                             //opponentMoveDiscloser.start()
                                         }
                                     }
@@ -152,9 +154,9 @@ Page {
                     urecei.processPendingDatagrams();
                     console.log("Initiate the game, start listening datagrams")
                     notification_box.text = qsTr("Listening other devices")
-                    if (player_id > 1) {
+                    //if (player_id > 1) {
                         initialPositionTimer.start()
-                    }
+                    //}
                 }
             }
             Button {
@@ -181,8 +183,17 @@ Page {
                 text: "Press first button"
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraSmall
-
             }
+
+            Label {
+                id:notification_current
+                visible: playMode == "othDevice"
+                x: Theme.horizontalPageMargin
+                text: "Current player"
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeExtraSmall
+            }
+
             Timer {
                 id:cardCloser
                 interval: 2130
@@ -210,10 +221,11 @@ Page {
                 running:false
                 repeat:true
                 onTriggered: {
-                    //console.log("opponent discloser")
                     var temp = urecei.rmove.split(",")
                     //console.log(temp[0])
-                    if (urecei.rmove != usend.sipadd && temp[0] != "INIT" && currentPlayer == Number(temp[1])){
+                    console.log("Current player ", currentPlayer, temp[0], temp[1], player_id)
+                    if (Number(temp[1]) != player_id  && temp[0] != "INIT" && currentPlayer == Number(temp[1])){
+                        //if (urecei.rmove != usend.sipadd && temp[0] != "INIT" && currentPlayer == Number(temp[1])){
                         notification_box.text = urecei.rmove
                         MyHelpers.showOthersMove()
                         //opponentMoveDiscloser.stop()

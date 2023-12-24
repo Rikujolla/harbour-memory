@@ -195,5 +195,16 @@
         <source>Network settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Number of players</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>helpers</name>
+    <message>
+        <source>Current player: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
