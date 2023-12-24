@@ -58,7 +58,7 @@ Page {
             }
             UdpReceiver {
                 id:urecei
-                onRmoveChanged: MyHelpers.showOthersMove()
+                //onRmoveChanged: MyHelpers.showOthersMove()
             }
 
             BackgroundItem {
@@ -164,9 +164,9 @@ Page {
                 text:"Start the game"
                 visible: playMode == "othDevice" && player_id < 2
                 onClicked: {
-                    console.log("Participate")
+                    //console.log("Participate")
                     visible: playMode == "othDevice"
-                    console.log(cardPositionString)
+                    //console.log(cardPositionString)
                     usend.cmove = "INIT," + player_id + "," + myPlayerName +"," + cardPositionString
                     usend.sendPosition()
                     console.log(usend.cmove)
@@ -174,7 +174,6 @@ Page {
 
                 }
             }
-
 
             Label {
                 id:notification_box
@@ -190,6 +189,14 @@ Page {
                 visible: playMode == "othDevice"
                 x: Theme.horizontalPageMargin
                 text: "Current player"
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeExtraSmall
+            }
+            Label {
+                id:notification_move
+                visible: playMode == "othDevice"
+                x: Theme.horizontalPageMargin
+                text: "Moves"
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraSmall
             }
@@ -226,7 +233,7 @@ Page {
                     console.log("Current player ", currentPlayer, temp[0], temp[1], player_id)
                     if (Number(temp[1]) != player_id  && temp[0] != "INIT" && currentPlayer == Number(temp[1])){
                         //if (urecei.rmove != usend.sipadd && temp[0] != "INIT" && currentPlayer == Number(temp[1])){
-                        notification_box.text = urecei.rmove
+                        notification_move.text = urecei.rmove
                         MyHelpers.showOthersMove()
                         //opponentMoveDiscloser.stop()
                     }
