@@ -17,5 +17,6 @@ ApplicationWindow {
     property int player_id:1 // Default id for playleader 1
     property int numberOfPlayers:2
     property int currentPlayer:1
+    property string turnNumber: "0/2"
 
 }

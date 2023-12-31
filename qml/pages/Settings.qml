@@ -284,8 +284,6 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         numberOfPlayers = numberPlayers.text
-                        //usend.sipadd = myPlayerName
-                        //console.log(myPlayerName, usend.sipadd);
                     }
                 }
             }

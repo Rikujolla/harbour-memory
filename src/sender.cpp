@@ -34,7 +34,7 @@ void Sender::sendPosition() //sendInitialPosition
 
 void Sender::broadcastDatagram() // sendMove
 {
-    qDebug() << "start broadcasting" << mySipadd << mySport;
+    qDebug() << "Send move" << mySipadd << mySport;
     QByteArray datagram = mySipadd.toUtf8();
     udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
 //! [1]

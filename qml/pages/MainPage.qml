@@ -115,6 +115,7 @@ Page {
                                         if (playMode == "othDevice"){
                                             usend.sipadd = "MOVE," + player_id + ","+ myPlayerName + "," + cardMoveString
                                             usend.broadcastDatagram()
+                                            notification_move.text = usend.sipadd
                                             MyHelpers.updateCurrentPlayer()
                                         }
                                         first_card_id = -1;
@@ -128,6 +129,7 @@ Page {
                                         if (playMode == "othDevice"){
                                             usend.sipadd = "MOVE," + player_id + "," + myPlayerName + "," + cardMoveString
                                             usend.broadcastDatagram()
+                                            notification_move.text = usend.sipadd
                                             MyHelpers.updateCurrentPlayer()
                                             //opponentMoveDiscloser.start()
                                         }
@@ -155,7 +157,7 @@ Page {
                     console.log("Initiate the game, start listening datagrams")
                     notification_box.text = qsTr("Listening other devices")
                     //if (player_id > 1) {
-                        initialPositionTimer.start()
+                    initialPositionTimer.start()
                     //}
                 }
             }
@@ -201,6 +203,22 @@ Page {
                 font.pixelSize: Theme.fontSizeExtraSmall
             }
 
+            Button {
+                //"If for some reason I am skipped, take my turn"
+                text:qsTr("Try to remove jam")
+                visible: playMode == "othDevice"
+                onClicked: {
+                    currentPlayer = player_id
+                    console.log("Forced player change: ", currentPlayer, player_id)
+                    usend.cmove = "JUMI," + player_id + "," + myPlayerName +"," + cardPositionString
+                    usend.sendPosition()
+                    notification_current.text = qsTr("Current player: ") + currentPlayer
+
+
+                }
+            }
+
+
             Timer {
                 id:cardCloser
                 interval: 2130
@@ -236,6 +254,10 @@ Page {
                         notification_move.text = urecei.rmove
                         MyHelpers.showOthersMove()
                         //opponentMoveDiscloser.stop()
+                    }
+                    else if (temp[0] == "JUMI"){
+                        currentPlayer = Number(temp[1])
+                        notification_current.text = qsTr("Current player: ") + currentPlayer
                     }
                 }
             }

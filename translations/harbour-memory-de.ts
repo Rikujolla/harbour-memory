@@ -90,6 +90,14 @@
         <source>Listening other devices</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Try to remove jam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current player: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Receiver</name>
