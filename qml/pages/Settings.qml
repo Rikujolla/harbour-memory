@@ -25,9 +25,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-//import QtQuick.LocalStorage 2.0
+import QtQuick.LocalStorage 2.0
 import Sailfish.Pickers 1.0
 import harbour.memory.sender 1.0
+import "./settings.js" as Mysets
 
 Page {
     id: page
@@ -222,6 +223,7 @@ Page {
                         myPlayerName = player.text
                         usend.sipadd = myPlayerName
                         console.log(myPlayerName, usend.sipadd);
+                        Mysets.saveSettings()
                     }
                 }
             }
@@ -254,6 +256,8 @@ Page {
                         player_id = playerIdBox.text
                         //usend.sipadd = myPlayerName
                         //console.log(myPlayerName, usend.sipadd);
+                        Mysets.saveSettings()
+
                     }
                 }
             }

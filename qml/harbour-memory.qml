@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.LocalStorage 2.0
 import "pages"
+import "pages/settings.js" as Mysets
 
 ApplicationWindow {
     initialPage: Component { MainPage { } }
@@ -18,5 +20,11 @@ ApplicationWindow {
     property int numberOfPlayers:2
     property int currentPlayer:1
     property string turnNumber: "0/2"
+    property bool debug: true // In releases, set this false
+
+    Component.onCompleted: {
+        Mysets.loadSettings()
+    }
+
 
 }

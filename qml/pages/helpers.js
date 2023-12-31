@@ -4,7 +4,7 @@ function populate_view() {
 
     var cards = ['b','b','B','B','k','k','K','K','n','n','N','N','p','p','P','P','q','q','Q','Q','r','r','R','R']
     shuffleArray(cards)
-    console.log(cards)
+    if (debug) {console.log(cards)}
 
     cards_img.clear();
     for (var i = 0; i < cards.length; i++) {
@@ -49,7 +49,7 @@ function movestring(size,i,j,id) {
             }
         }
     }
-    console.log(_movestring)
+    if (debug) {console.log(_movestring)}
 
     return _movestring
 
@@ -69,16 +69,16 @@ function showOthersMove() {
     cardMoveString = cards.toString();
     if (isInArray("99", cards)) {
         falseMoveCloser.start()
-        console.log("falsemove")
+        if (debug) {console.log("falsemove")}
     }
-    console.log(currentPlayer + " showOthersMove " + urecei.rmove)
+    if (debug) {console.log(currentPlayer + " showOthersMove " + urecei.rmove)}
 }
 
 function makeInitialPosition() {
     var table = []
     var cards = []
     table = urecei.rmove.split(",")
-    console.log(table[0])
+    if (debug) {console.log(table[0])}
     if (table[0] == "INIT") {
         cards_img.clear();
         for (var i = 3; i<table.length;i++){
@@ -94,10 +94,9 @@ function makeInitialPosition() {
 }
 
 function hideFalseMove() {
-    //console.log("movee" + urecei.rmove)
     var table = []
     table = cardMoveString.split(",")
-    console.log(cardMoveString)
+    if (debug) {console.log(cardMoveString)}
     for (var i = 0; i<table.length;i++){
         if (Number(table[i])>98){
             cards_img.set(i,{"visib":1})
@@ -117,6 +116,21 @@ function updateCurrentPlayer() {
 
 }
 
+// Function closes my cards
+function closeCards() {
+    if (first_card_id > -1){
+        cards_img.set(first_card_id,{"visib":1})
+        cards_img.set(first_card_id,{"mareaenab":1})
+        cards_img.set(first_card_id,{"owner":0})
+    }
+    if (second_card_id > -1){
+        cards_img.set(second_card_id,{"visib":1})
+        cards_img.set(second_card_id,{"mareaenab":1})
+        cards_img.set(second_card_id,{"owner":0})
+    }
+    first_card_id = -1;
+    second_card_id = -1;
+}
 
 
 

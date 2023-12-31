@@ -51,13 +51,13 @@ Page {
             PageHeader {
                 title: qsTr("About page")
             }
-            Image {
+            /*Image {
                 id: logo
                 source: "./assets/harbour-math-teacher.png"
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: Screen.width/7
                 width: Screen.width/7
-            }
+            }*/
 
             Label {
                 font.pixelSize: Theme.fontSizeSmall
@@ -69,7 +69,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 //: The name of the app followed with a version number
-                text: {qsTr("Memory, version") + " 0.1.3"}
+                text: {qsTr("Memory, version") + " 0.1.4"}
             }
 
             SectionHeader { text: qsTr("Idea") }

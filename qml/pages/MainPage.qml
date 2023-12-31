@@ -58,7 +58,7 @@ Page {
             }
             UdpReceiver {
                 id:urecei
-                //onRmoveChanged: MyHelpers.showOthersMove()
+                //onRmoveChanged: console.log("signal test")
             }
 
             BackgroundItem {
@@ -92,9 +92,8 @@ Page {
                             width: memoGrid.cellWidth
                             enabled: !cardCloser.running && mareaenab > 0 && player_id == currentPlayer
                             onClicked: {
-                                //console.log(index);
                                 if (cardCloser.running){
-                                    console.log("Nothing")
+                                    if (debug) {console.log("Nothing")}
                                 }
 
                                 else if (first_card_id<0) {
@@ -120,7 +119,7 @@ Page {
                                         }
                                         first_card_id = -1;
                                         second_card_id = -1;
-                                        console.log("Sama")
+                                        if (debug) {console.log("Sama")}
                                     } else {
                                         cards_img.set(first_card_id,{"owner":99})
                                         cards_img.set(second_card_id,{"owner":99})
@@ -143,7 +142,7 @@ Page {
 
             Label {
                 x: Theme.horizontalPageMargin
-                text: qsTr("Player")+":" + myPoints
+                text: qsTr("Player")+": " + myPlayerName + ", pairs: " + myPoints
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
             }
@@ -154,7 +153,7 @@ Page {
                 visible: playMode == "othDevice"
                 onClicked: {
                     urecei.processPendingDatagrams();
-                    console.log("Initiate the game, start listening datagrams")
+                    if (debug) {console.log("Initiate the game, start listening datagrams")}
                     notification_box.text = qsTr("Listening other devices")
                     //if (player_id > 1) {
                     initialPositionTimer.start()
@@ -166,12 +165,10 @@ Page {
                 text:"Start the game"
                 visible: playMode == "othDevice" && player_id < 2
                 onClicked: {
-                    //console.log("Participate")
                     visible: playMode == "othDevice"
-                    //console.log(cardPositionString)
                     usend.cmove = "INIT," + player_id + "," + myPlayerName +"," + cardPositionString
                     usend.sendPosition()
-                    console.log(usend.cmove)
+                    if (debug) {console.log(usend.cmove)}
                     notification_box.text = qsTr("My cards position sent to other users")
 
                 }
@@ -209,34 +206,21 @@ Page {
                 visible: playMode == "othDevice"
                 onClicked: {
                     currentPlayer = player_id
-                    console.log("Forced player change: ", currentPlayer, player_id)
+                    if (debug) {console.log("Forced player change: ", currentPlayer, player_id)}
                     usend.cmove = "JUMI," + player_id + "," + myPlayerName +"," + cardPositionString
                     usend.sendPosition()
                     notification_current.text = qsTr("Current player: ") + currentPlayer
-
-
+                    MyHelpers.closeCards()
                 }
             }
 
-
             Timer {
                 id:cardCloser
-                interval: 2130
+                interval: 3147
                 running: false
                 repeat: false
                 onTriggered:{
-                    cards_img.set(first_card_id,{"visib":1})
-                    cards_img.set(second_card_id,{"visib":1})
-                    cards_img.set(first_card_id,{"mareaenab":1})
-                    cards_img.set(second_card_id,{"mareaenab":1})
-                    cards_img.set(first_card_id,{"owner":0})
-                    cards_img.set(second_card_id,{"owner":0})
-                    first_card_id = -1;
-                    second_card_id = -1;
-                    cardCloser.stop()
-                    if (playMode == "othDevice"){
-                        //opponentMoveDiscloser.start()
-                    }
+                    MyHelpers.closeCards()
                 }
             }
 
@@ -247,13 +231,11 @@ Page {
                 repeat:true
                 onTriggered: {
                     var temp = urecei.rmove.split(",")
-                    //console.log(temp[0])
-                    console.log("Current player ", currentPlayer, temp[0], temp[1], player_id)
+                    if (debug) {console.log("Current player ", currentPlayer, temp[0], temp[1], player_id)}
                     if (Number(temp[1]) != player_id  && temp[0] != "INIT" && currentPlayer == Number(temp[1])){
                         //if (urecei.rmove != usend.sipadd && temp[0] != "INIT" && currentPlayer == Number(temp[1])){
                         notification_move.text = urecei.rmove
                         MyHelpers.showOthersMove()
-                        //opponentMoveDiscloser.stop()
                     }
                     else if (temp[0] == "JUMI"){
                         currentPlayer = Number(temp[1])
@@ -268,7 +250,7 @@ Page {
                 running:false
                 repeat:true
                 onTriggered: {
-                    console.log("Initial position")
+                    if (debug) {console.log("Initial position")}
                     MyHelpers.makeInitialPosition()
                     opponentMoveDiscloser.start()
                 }
@@ -280,12 +262,11 @@ Page {
                 running:false
                 repeat:false
                 onTriggered: {
-                    console.log("Close false move")
+                    if (debug) {console.log("Close false move")}
                     MyHelpers.hideFalseMove()
                     falseMoveCloser.stop()
                 }
             }
-
 
             ListModel {
                 id:cards_img
